@@ -10,5 +10,6 @@
     "module": false,
     "inject": false,
     "require":false
-  }
+  },
+  "esnext":6
 }
