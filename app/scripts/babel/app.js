@@ -1,8 +1,6 @@
 'use strict';
 
-var angular = require('angular');
-
-var myApp = angular.module('myApp', []);
+var myApp = require('angular').module('myApp', []);
 
 myApp.factory('Data', function () {
   return { message: 'I\'m data from a service' };
