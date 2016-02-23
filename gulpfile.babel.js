@@ -12,7 +12,20 @@ import watchify from 'watchify' ;
 import babel from 'babelify' ;
 import glob from 'glob';
 
+//browserSync
+var browserSync = require('browser-sync').create();
+
 const $ = gulpLoadPlugins();
+
+gulp.task('sass', function() {
+    return gulp.src('./app/stylesheets/bundle.scss')
+        .pipe($.sass().on('error', $.sass.logError))
+        .pipe($.autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+        .pipe(gulp.dest('./app/stylesheets'));
+});
 
 gulp.task('browserify', function() {
 
@@ -46,17 +59,19 @@ gulp.task('browserify', function() {
   rebundle();
 });
 
+gulp.task('watch', ['browserify', 'sass'], () => {
 
-gulp.task('watch', ['browserify'], () => {
-  $.livereload.listen();
+  browserSync.init({
+    server: "./app",
+    notify: false
+  });
 
   gulp.watch([
-    'app/*.html',
-    'app/scripts/*.js',
-    'app/images/**/*',
-    'app/styles/**/*',
-    'app/_locales/**/*.json'
-  ]).on('change', $.livereload.reload);
+    'app/index.html',
+    'app/stylesheets/bundle.css',
+    'app/scripts/build.js',
+  ]).on('change', browserSync.reload);
 
   gulp.watch('./app/scripts/babel/**/*.js', ['browserify']);
+  gulp.watch('./app/stylesheets/**/*.scss', ['sass']);
 });

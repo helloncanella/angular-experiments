@@ -1,11 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-/*globals window*/
-
 'use strict';
 
-var angular = require('angular');
-
-var myApp = angular.module('myApp', []);
+var myApp = require('angular').module('myApp', []);
 
 myApp.factory('Data', function () {
   return { message: 'I\'m data from a service' };
@@ -13,17 +9,12 @@ myApp.factory('Data', function () {
 
 myApp.filter('reverse', function () {
   return function (text) {
-    return text.split(').reverse().join(');
+
+    console.log('LALAL', text.split('').reverse().join(''));
+
+    return text.split('').reverse().join('');
   };
 });
-
-function FirstCtrl($scope, Data) {
-  $scope.data = Data;
-}
-
-function SecondCtrl($scope, Data) {
-  $scope.data = Data;
-}
 
 },{"angular":3}],2:[function(require,module,exports){
 /**
