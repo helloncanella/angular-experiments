@@ -1,1 +1,5 @@
-<div id=\'gridCalendar\'><td>oi</td></div>
+<table id="gridCalendar" ng-controller="CalendarController">
+  <tr ng-repeat='hour in time'>
+    <td ng-repeat='day in thirtyDays' data-day='{{day}}' data-hour='{{hour | hourFormat}}'></td>
+  </tr>
+</table>

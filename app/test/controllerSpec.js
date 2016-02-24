@@ -23,7 +23,7 @@ describe('CalendarController', function() {
         end: 20 //20h
       };
 
-      timeArray = $scope.time();
+      timeArray = $scope.time;
     });
 
     it('given the availability output an array of time', function() {
@@ -43,17 +43,11 @@ describe('CalendarController', function() {
     var today, thirtyDays;
 
     beforeEach(function(){
-      today = new Date(2016,10,16);
-      thirtyDays = $scope.thirtyDays(today);
+      thirtyDays = $scope.thirtyDays;
     });
 
     it('outputs an array with 30 days', function(){
       expect(thirtyDays.length).toEqual(30);
-    });
-
-    it('if today is Wed Dec 16 2016 GMT-0200 (BRST), the 30th from now is Thu Dec 15 2016 00:00:00 GMT-0200 (BRST)', function(){
-      var last = thirtyDays.length-1;
-      expect(thirtyDays[last]).toEqual(new Date('Thu Dec 15 2016 00:00:00 GMT-0200 (BRST)'));
     });
 
   });

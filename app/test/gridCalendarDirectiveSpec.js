@@ -18,16 +18,14 @@ describe('Unit testing great quotes', function() {
     $rootScope = _$rootScope_;
   }));
 
-  it('The number of generated cells is equal to 480 (30 days * 16 thirty minutes)', function() {
+  it('The number of generated cells is equal to 510 (30 days * 17 thirty minutes)', function() {
     // Compile a piece of HTML containing the directive
     var element = $compile("<grid-calendar></grid-calendar>")($rootScope);
     // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
     $rootScope.$digest();
 
+    var table = element[0];
 
-    console.log(element);
-
-    // Check that the compiled element contains the templated content
-    expect(element.children('td').length).toEqual(480);
+    expect(table.querySelectorAll('td').length).toEqual(510);
   });
 });
