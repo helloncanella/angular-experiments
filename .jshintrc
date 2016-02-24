@@ -10,7 +10,8 @@
     "module": false,
     "inject": false,
     "require":false,
-    "console":false
+    "console":false,
+    "window":false
   },
   "esnext":6
 }

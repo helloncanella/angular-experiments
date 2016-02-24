@@ -1,16 +1,53 @@
 'use strict';
+(function(angular){
 
-var myApp = require('angular').module('myApp', []);
+  var app = angular.module('app', []);
 
-myApp.factory('Data', function () {
-  return { message: 'I\'m data from a service' };
-});
+  app.controller('CalendarController', function CalendarController($scope) {
 
-myApp.filter('reverse', function () {
-  return function (text) {
+    $scope.time = function(availability){
+      var timeArray = [],
+          time = availability.start,
+          stringTime,
+          complement;
 
-    console.log('LALAL',text.split('').reverse().join(''));
+      while(time<=availability.end){
+        if(time-Math.floor(time) === 0.5){
+          complement = ':30';
+        }else{
+          complement = ':00';
+        }
 
-    return text.split('').reverse().join('');
-  };
-});
+        stringTime = Math.floor(time)+complement;
+
+        timeArray.push(stringTime);
+        time+=0.5;
+      }
+
+      return timeArray;
+    };
+
+    $scope.thirtyDays = function(today){
+
+        today = today || new Date(); // today may be arbitrarily given as argument
+
+        var
+          day,
+          year = today.getFullYear(),
+          month = today.getMonth(),
+          todayDate = today.getDate(),
+          thirtyDays = [];
+
+      for(var i=0; i<30; i++){
+        day = new Date(year, month, todayDate + i);
+        thirtyDays.push(day);
+      }
+
+      return thirtyDays;
+    };
+
+
+
+  });
+
+})(window.angular|| require('angular'));
