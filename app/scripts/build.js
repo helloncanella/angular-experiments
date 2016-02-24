@@ -1,20 +1,54 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var myApp = require('angular').module('myApp', []);
+(function (angular) {
 
-myApp.factory('Data', function () {
-  return { message: 'I\'m data from a service' };
-});
+  var app = angular.module('app', []);
 
-myApp.filter('reverse', function () {
-  return function (text) {
+  app.controller('CalendarController', function CalendarController($scope) {
 
-    console.log('LALAL', text.split('').reverse().join(''));
+    $scope.availability = {
+      start: 12,
+      end: 20
+    };
 
-    return text.split('').reverse().join('');
-  };
-});
+    $scope.time = function () {
+      var timeArray = [],
+          time = this.availability.start;
+
+      while (time <= this.availability.end) {
+        timeArray.push(time);
+        time += 0.5;
+      }
+
+      return timeArray;
+    };
+
+    $scope.thirtyDays = function (today) {
+
+      today = today || new Date(); // today may be defined in the argument
+
+      var day,
+          year = today.getFullYear(),
+          month = today.getMonth(),
+          todayDate = today.getDate(),
+          thirtyDays = [];
+
+      for (var i = 0; 30 > i; i++) {
+        day = new Date(year, month, todayDate + i);
+        thirtyDays.push(day);
+      }
+
+      return thirtyDays;
+    };
+  });
+
+  app.directive('gridCalendar', function () {
+    return {
+      templateUrl: 'view/templates/grid-calendar.html' // DON'T USE ./view/bla,bla,bla...
+    };
+  });
+})(window.angular || require('angular'));
 
 },{"angular":3}],2:[function(require,module,exports){
 /**

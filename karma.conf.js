@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: './app',
 
 
     // frameworks to use
@@ -15,8 +15,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      './app/scripts/babel/*.js',
-      './app/test/*.js'
+      'scripts/babel/*.js',
+      'test/*.js',
+      'view/templates/**/*.html'
     ],
 
 
@@ -27,9 +28,15 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      './app/scripts/babel/*.js': ['browserify'],
-      './app/test/*.js': ['browserify']
+      'view/templates/**/*.html':['ng-html2js'], // transforming all templates in js strings
+      'scripts/babel/*.js': ['browserify'],
+      'test/*.js': ['browserify']
     },
+
+    ngHtml2JsPreprocessor: {
+      moduleName: 'templates'
+    },
+
     browserify: {
       debug: true,
       transform: ['babelify']

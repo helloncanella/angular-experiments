@@ -8,6 +8,7 @@ describe('Unit testing great quotes', function() {
 
   // Load the myApp module, which contains the directive
   beforeEach(angular.mock.module('app'));
+  beforeEach(angular.mock.module('templates'));
 
   // Store references to $rootScope and $compile
   // so they are available to all tests in this describe block
@@ -22,6 +23,10 @@ describe('Unit testing great quotes', function() {
     var element = $compile("<grid-calendar></grid-calendar>")($rootScope);
     // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
     $rootScope.$digest();
+
+
+    console.log(element);
+
     // Check that the compiled element contains the templated content
     expect(element.children('td').length).toEqual(480);
   });

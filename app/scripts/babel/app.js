@@ -3,8 +3,6 @@
 
   var app = angular.module('app', []);
 
-
-
   app.controller('CalendarController', function CalendarController($scope) {
 
     $scope.availability = {
@@ -47,7 +45,7 @@
 
   app.directive('gridCalendar',function(){
     return{
-      templateURL:'./view/templates/grid-calendar.html'
+      templateUrl:'view/templates/grid-calendar.html' // DON'T USE ./view/bla,bla,bla...
     };
   });
 

@@ -1,11 +1,14 @@
 'use strict';
 
+require('angular-mocks');
+
 describe('Unit testing great quotes', function() {
   var $compile,
       $rootScope;
 
   // Load the myApp module, which contains the directive
-  beforeEach(module('myApp'));
+  beforeEach(angular.mock.module('app'));
+  beforeEach(angular.mock.module('templates'));
 
   // Store references to $rootScope and $compile
   // so they are available to all tests in this describe block
