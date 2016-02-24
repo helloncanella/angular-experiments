@@ -18,23 +18,22 @@ describe('CalendarController', function() {
     var availability, timeArray = [];
 
     beforeEach(function(){
-      availability = {
+      $scope.availability = {
         start: 12, //12h
         end: 20 //20h
       };
 
-      timeArray = $scope.time(availability);
+      timeArray = $scope.time();
     });
 
     it('given the availability output an array of time', function() {
       expect(timeArray.length).toEqual(17);
     });
 
-    it('each component of timeArray has the format hh:00 or hh:30', function(){
+    it('the first component needs to be 12.5 and the last 20', function(){
       var last = timeArray.length - 1;
-
-      expect(timeArray[1]).toEqual('12:30');
-      expect(timeArray[last]).toEqual('20:00');
+      expect(timeArray[1]).toEqual(12.5);
+      expect(timeArray[last]).toEqual(20);
     });
 
   });

@@ -67,7 +67,7 @@ gulp.task('watch', ['browserify', 'sass'], () => {
   });
 
   gulp.watch([
-    'app/index.html',
+    'app/**/*.html',//load whenever a template change
     'app/stylesheets/bundle.css',
     'app/scripts/build.js',
   ]).on('change', browserSync.reload);

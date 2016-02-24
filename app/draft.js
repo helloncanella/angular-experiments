@@ -3,21 +3,24 @@
 
   var app = angular.module('app', []);
 
-
-
   app.controller('CalendarController', function CalendarController($scope) {
 
-    $scope.availability = {
-      start:12,
-      end:20
-    };
-
-    $scope.time = function(){
+    $scope.time = function(availability){
       var timeArray = [],
-          time = this.availability.start;
+          time = availability.start,
+          stringTime,
+          complement;
 
-      while(time<=this.availability.end){
-        timeArray.push(time);
+      while(time<=availability.end){
+        if(time-Math.floor(time) === 0.5){
+          complement = ':30';
+        }else{
+          complement = ':00';
+        }
+
+        stringTime = Math.floor(time)+complement;
+
+        timeArray.push(stringTime);
         time+=0.5;
       }
 
@@ -35,7 +38,7 @@
           todayDate = today.getDate(),
           thirtyDays = [];
 
-      for(var i=0; 30>i; i++){
+      for(var i=0; i<30; i++){
         day = new Date(year, month, todayDate + i);
         thirtyDays.push(day);
       }
@@ -43,14 +46,8 @@
       return thirtyDays;
     };
 
+
+
   });
-
-  app.directive('gridCalendar',function(){
-    return{
-      templateURL:'./view/templates/grid-calendar.html'
-    };
-  });
-
-
 
 })(window.angular|| require('angular'));
