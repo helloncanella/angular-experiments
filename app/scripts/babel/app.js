@@ -85,13 +85,41 @@
       end:20
     };
 
-
     $scope.time = calendarHelper.time($scope.availability);
     $scope.thirtyDays = calendarHelper.thirtyDays();
 
+  }]);
+
+  app.directive('control',['$document',function($document){
+
+    function link(scope,element,attr){
+      var action = attr.action;
+
+      var gridCalendar, dayHeader;
+
+      angular.element($document[0]).ready(function(){
+        gridCalendar = angular.element($document[0].querySelector('#grid-calendar'));
+        dayHeader = angular.element($document[0].querySelector('#time-bar'));
+
+      });
 
 
-
+      element.bind('click', function(){
+        if(action=='back'){
+          console.log(gridCalendar, dayHeader);
+        }else if(action=='forward'){
+          console.log(gridCalendar, dayHeader);
+        }
+      });
+    }
+    return{
+      restrict: 'E',
+      scope:{
+        action:'@',
+      },
+      link: link,
+      templateUrl:'view/templates/control/control.html'
+    };
   }]);
 
   app.directive('gridCalendar',function(){
@@ -139,7 +167,6 @@
         scope.$watch(
           'cellWidth', function ( cellWidth ) {
             element[0].style.width = cellWidth+'px';
-            console.log(cellWidth);
           }
         );
       }

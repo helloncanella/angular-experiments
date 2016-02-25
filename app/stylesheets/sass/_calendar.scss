@@ -4,11 +4,7 @@
   $border-color:red;
   margin-top: 85px;
 
-
   display: flex;
-
-
-
 
   .right-side{
     overflow-y: hidden;
@@ -28,6 +24,7 @@
   }
 
   #grid-calendar{
+    position:relative;
     &>div{
       display: flex;
     }
@@ -43,6 +40,7 @@
   }
 
   #day-header{
+    position:relative;
     display:flex;
     .cell:first-child{
       border-left:1px solid $border-color;

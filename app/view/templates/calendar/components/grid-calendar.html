@@ -1,4 +1,4 @@
-<div resizecontent id="grid-calendar" ng-controller="CalendarController">
+<div id="grid-calendar" ng-controller="CalendarController" resizecontent>
   <div ng-repeat='hour in time'>
     <div class='cell' resizecell ng-repeat='day in thirtyDays' data-day='{{day}}' data-hour='{{hour | hourFormat}}'></div>
   </div>

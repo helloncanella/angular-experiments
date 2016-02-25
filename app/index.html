@@ -5,15 +5,22 @@
   <link rel="stylesheet" href="./bower_components/foundation/css/foundation.min.css">
   <link rel="stylesheet" href="./stylesheets/bundle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-  <script src="scripts/babel/app.js" charset="utf-8"></script>
   <title>teco</title>
 </head>
 <body>
 
   <header></header>
   <main ng-app="app">
+
+    <control action="back"></control>
+    <control action="forward"></control>
+
     <calendar></calendar>
+
+
+
   </main>
 
+  <script src="scripts/babel/app.js" charset="utf-8"></script>
 </body>
 </html>

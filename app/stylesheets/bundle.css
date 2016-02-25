@@ -26,10 +26,12 @@ header {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center; }
-  #calendar #grid-calendar > div {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex; }
+  #calendar #grid-calendar {
+    position: relative; }
+    #calendar #grid-calendar > div {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex; }
   #calendar #time-bar {
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -40,6 +42,7 @@ header {
     position: relative;
     top: 3.52941vh; }
   #calendar #day-header {
+    position: relative;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
