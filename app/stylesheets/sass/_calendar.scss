@@ -1,32 +1,53 @@
 #calendar{
 
-  $cell-height:40px;
+  $cell-height:60vh/17;
+  $border-color:red;
+  margin-top: 85px;
 
-  overflow-y: hidden;
-  font-size: 9px;
 
-  #grid-calendar, #time-bar{
-    td{
-      width:100%;
+  display: flex;
+
+
+
+
+  .right-side{
+    overflow-y: hidden;
+    .cell{
+      border-left: none;
+    }
+    padding-bottom:$cell-height/6;
+  }
+
+  .cell{
+    text-align: center;
+    height: $cell-height;
+    border:1px solid $border-color;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #grid-calendar{
+    &>div{
+      display: flex;
     }
   }
 
   #time-bar {
-    tr{
-      display:flex;
-      flex-flow: column;
+    display:flex;
+    flex-flow: column;
+    position: relative;
+    top: $cell-height*1;
 
-      td{
-        border:1px solid gray;
-        height:$cell-height;
-        padding:10px;
-      }
-    }
+
   }
 
   #day-header{
-    width:100%;
-
+    display:flex;
+    .cell:first-child{
+      border-left:1px solid $border-color;
+    }
   }
+
 
 }

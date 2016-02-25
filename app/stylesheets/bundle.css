@@ -4,23 +4,47 @@ header {
   background: #333; }
 
 #calendar {
-  overflow-y: hidden;
-  font-size: 9px; }
-  #calendar #grid-calendar td, #calendar #time-bar td {
-    width: 100%; }
-  #calendar #time-bar tr {
+  margin-top: 85px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  #calendar .right-side {
+    overflow-y: hidden;
+    padding-bottom: 0.58824vh; }
+    #calendar .right-side .cell {
+      border-left: none; }
+  #calendar .cell {
+    text-align: center;
+    height: 3.52941vh;
+    border: 1px solid red;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center; }
+  #calendar #grid-calendar > div {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+  #calendar #time-bar {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-flex-flow: column;
     -ms-flex-flow: column;
-    flex-flow: column; }
-    #calendar #time-bar tr td {
-      border: 1px solid gray;
-      height: 40px;
-      padding: 10px; }
+    flex-flow: column;
+    position: relative;
+    top: 3.52941vh; }
   #calendar #day-header {
-    width: 100%; }
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+    #calendar #day-header .cell:first-child {
+      border-left: 1px solid red; }
 
 body {
   margin: 0; }

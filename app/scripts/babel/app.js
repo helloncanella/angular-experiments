@@ -121,24 +121,39 @@
       restrict: 'E',
       templateUrl:'view/templates/calendar/calendar.html', // DON'T USE ./view/bla,bla,bla...
       link: function(scope,element,attr){
-        scope.tdwidth = element[0].querySelector('#calendar').clientWidth / 8;
+        scope.cellWidth = element[0].querySelector('#calendar').clientWidth / 8;
 
 
         angular.element($window).bind('resize', function(){
-          scope.tdwidth = element[0].querySelector('#calendar').clientWidth / 8;
+          scope.cellWidth = element[0].querySelector('#calendar').clientWidth / 8;
           scope.$digest();
         });
       }
     };
   }]);
 
-  app.directive('resizetd', function(){
+  app.directive('resizecell', function(){
     return{
       restrict: 'A',
       link: function(scope,element,attr){
         scope.$watch(
-          'tdwidth', function ( tdwidth ) {
-            element[0].querySelector('div').style.width = tdwidth+'px';
+          'cellWidth', function ( cellWidth ) {
+            element[0].style.width = cellWidth+'px';
+            console.log(cellWidth);
+          }
+        );
+      }
+    };
+  });
+
+
+  app.directive('resizecontent', function(){
+    return{
+      restrict: 'A',
+      link: function(scope,element,attr){
+        scope.$watch(
+          'cellWidth', function ( cellWidth ) {
+            element[0].style.width = (30*cellWidth)+'px';
           }
         );
       }

@@ -31,7 +31,7 @@ var
 
       var table = element[0];
 
-      expect(table.querySelectorAll('td').length).toEqual(510);
+      expect(table.querySelectorAll('.cell').length).toEqual(510);
     });
   });
 
@@ -45,7 +45,7 @@ var
       var timeBar = element[0];
 
 
-      expect(timeBar.querySelectorAll('td').length).toEqual(17);
+      expect(timeBar.querySelectorAll('.cell').length).toEqual(17);
     });
   });
 
@@ -60,7 +60,7 @@ var
       var timeBar = element[0];
 
 
-      
+
     });
   });
 
@@ -76,7 +76,7 @@ var
       var dayHeader = element[0];
       //console.log(new Date(dayHeader.querySelector('td').attributes['data-day'].value).getMonth()+1);
 
-      expect(dayHeader.querySelectorAll('td').length).toEqual(30);
+      expect(dayHeader.querySelectorAll('.cell').length).toEqual(30);
     });
   });
 

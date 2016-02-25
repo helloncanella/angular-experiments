@@ -1,7 +1,3 @@
-<div id="day-header">
-  <table ng-controller="CalendarController">
-    <tr>
-      <td resizetd ng-repeat='day in thirtyDays' data-day='{{day}}'><div>{{day | dayFormat}}</div></td>
-    </tr>
-  </table>
+<div resizecontent id="day-header" ng-controller="CalendarController">
+  <div class='cell' resizecell ng-repeat='day in thirtyDays' data-day='{{day}}'><span>{{day | dayFormat}}</span></div>
 </div>
