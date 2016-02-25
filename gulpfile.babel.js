@@ -59,7 +59,7 @@ gulp.task('browserify', function() {
   rebundle();
 });
 
-gulp.task('watch', ['browserify', 'sass'], () => {
+gulp.task('watch', [/*'browserify',*/ 'sass'], () => {
 
   browserSync.init({
     server: "./app",
@@ -69,9 +69,9 @@ gulp.task('watch', ['browserify', 'sass'], () => {
   gulp.watch([
     'app/**/*.html',//load whenever a template change
     'app/stylesheets/bundle.css',
-    'app/scripts/build.js',
+    'app/scripts/**/*.js',
   ]).on('change', browserSync.reload);
 
-  gulp.watch('./app/scripts/babel/**/*.js', ['browserify']);
+  //gulp.watch('./app/scripts/babel/**/*.js', ['browserify']);
   gulp.watch('./app/stylesheets/**/*.scss', ['sass']);
 });

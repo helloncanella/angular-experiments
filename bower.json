@@ -1,0 +1,21 @@
+{
+  "name": "angular-test",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Hellon Canella <helloncanella@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/helloncanella/angular-experiments",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.5.3"
+  }
+}

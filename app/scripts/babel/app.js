@@ -3,6 +3,21 @@
 
   var app = angular.module('app', []);
 
+  app.filter('dayFormat', function(){
+    return function(input){
+
+      var
+        weekDayArray = ['Dom', 'Seg', 'Ter', 'Quar', 'Qui', 'Sex', 'Sáb'],
+        day = new Date(input),
+        weekDay = weekDayArray[day.getDay()],
+        month = ('0'+(day.getMonth() + 1)).slice(-2),
+        monthDay = ('0'+day.getDate()).slice(-2);
+
+
+      return weekDay+', '+monthDay+'/'+month;
+    };
+  });
+
   app.filter('hourFormat', function(){
     return function(input){
 
@@ -52,7 +67,7 @@
 
         for(var i=0; 30>i; i++){
           day = new Date(year, month, todayDate + i);
-          thirtyDays.push(day);
+          thirtyDays.push(day.toLocaleString());
         }
 
         return thirtyDays;
@@ -74,14 +89,60 @@
     $scope.time = calendarHelper.time($scope.availability);
     $scope.thirtyDays = calendarHelper.thirtyDays();
 
+
+
+
   }]);
 
   app.directive('gridCalendar',function(){
     return{
-      templateUrl:'view/templates/grid-calendar.html' // DON'T USE ./view/bla,bla,bla...
+      restrict: 'E',
+      templateUrl:'view/templates/calendar/components/grid-calendar.html' // DON'T USE ./view/bla,bla,bla...
     };
   });
 
 
+  app.directive('dayHeader',function(){
+    return{
+      restrict: 'E',
+      templateUrl:'view/templates/calendar/components/day-header.html' // DON'T USE ./view/bla,bla,bla...
+    };
+  });
+
+  app.directive('timeBar',function(){
+    return{
+      restrict: 'E',
+      templateUrl:'view/templates/calendar/components/time-bar.html' // DON'T USE ./view/bla,bla,bla...
+    };
+  });
+
+  app.directive('calendar',['$window', function($window){
+    return{
+      restrict: 'E',
+      templateUrl:'view/templates/calendar/calendar.html', // DON'T USE ./view/bla,bla,bla...
+      link: function(scope,element,attr){
+        scope.tdwidth = element[0].querySelector('#calendar').clientWidth / 8;
+
+
+        angular.element($window).bind('resize', function(){
+          scope.tdwidth = element[0].querySelector('#calendar').clientWidth / 8;
+          scope.$digest();
+        });
+      }
+    };
+  }]);
+
+  app.directive('resizetd', function(){
+    return{
+      restrict: 'A',
+      link: function(scope,element,attr){
+        scope.$watch(
+          'tdwidth', function ( tdwidth ) {
+            element[0].querySelector('div').style.width = tdwidth+'px';
+          }
+        );
+      }
+    };
+  });
 
 })(window.angular|| require('angular'));

@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="./bower_components/foundation/css/foundation.min.css">
   <link rel="stylesheet" href="./stylesheets/bundle.css">
-  <script src="/node_modules/angular/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="scripts/babel/app.js" charset="utf-8"></script>
   <title>teco</title>
 </head>
 <body>
-  <h1>oi</h1>
+
+  <header></header>
+  <main ng-app="app">
+    <calendar></calendar>
+  </main>
+
 </body>
 </html>

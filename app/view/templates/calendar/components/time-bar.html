@@ -1,0 +1,7 @@
+<div id="time-bar">
+  <table ng-controller="CalendarController">
+    <tr>
+      <td resizetd ng-repeat='hour in time' data-hour='{{hour | hourFormat}}'><div>{{hour | hourFormat}}</div></td>
+    </tr>
+  </table>
+</div>

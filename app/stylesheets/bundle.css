@@ -1,0 +1,26 @@
+header {
+  width: 100%;
+  height: 50px;
+  background: #333; }
+
+#calendar {
+  overflow-y: hidden;
+  font-size: 9px; }
+  #calendar #grid-calendar td, #calendar #time-bar td {
+    width: 100%; }
+  #calendar #time-bar tr {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column; }
+    #calendar #time-bar tr td {
+      border: 1px solid gray;
+      height: 40px;
+      padding: 10px; }
+  #calendar #day-header {
+    width: 100%; }
+
+body {
+  margin: 0; }

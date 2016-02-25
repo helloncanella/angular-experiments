@@ -1,0 +1,32 @@
+#calendar{
+
+  $cell-height:40px;
+
+  overflow-y: hidden;
+  font-size: 9px;
+
+  #grid-calendar, #time-bar{
+    td{
+      width:100%;
+    }
+  }
+
+  #time-bar {
+    tr{
+      display:flex;
+      flex-flow: column;
+
+      td{
+        border:1px solid gray;
+        height:$cell-height;
+        padding:10px;
+      }
+    }
+  }
+
+  #day-header{
+    width:100%;
+
+  }
+
+}
