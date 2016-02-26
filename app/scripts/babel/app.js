@@ -90,25 +90,31 @@
 
   }]);
 
-  app.directive('control',['$document',function($document){
+  app.directive('control',['$document', '$window',function($document, $window){
 
     function link(scope,element,attr){
+
+      var  width, widthStr, scrollXBox;
+
       var action = attr.action;
 
-      var gridCalendar, dayHeader;
-
-      angular.element($document[0]).ready(function(){
-        gridCalendar = angular.element($document[0].querySelector('#grid-calendar'));
-        dayHeader = angular.element($document[0].querySelector('#time-bar'));
-
-      });
-
-
       element.bind('click', function(){
+        var scrollXBox = geScrollXBox();
+        var width = getBoxWidth();
+
         if(action=='back'){
-          console.log(gridCalendar, dayHeader);
+          scrollXBox.scrollLeft -= width;
         }else if(action=='forward'){
-          console.log(gridCalendar, dayHeader);
+          scrollXBox.scrollLeft += width;
+        }
+
+        function geScrollXBox(){
+          return angular.element($document[0].getElementById('scroll-x-box'))[0];
+        }
+
+        function getBoxWidth(){
+          widthStr=$window.getComputedStyle(scrollXBox).width;
+          return Number(widthStr.replace(/px/,''));
         }
       });
     }
@@ -125,7 +131,10 @@
   app.directive('gridCalendar',function(){
     return{
       restrict: 'E',
-      templateUrl:'view/templates/calendar/components/grid-calendar.html' // DON'T USE ./view/bla,bla,bla...
+      templateUrl:'view/templates/calendar/components/grid-calendar.html', // DON'T USE ./view/bla,bla,bla...
+      link: function(scope, element, attr){
+
+      }
     };
   });
 
@@ -148,8 +157,9 @@
     return{
       restrict: 'E',
       templateUrl:'view/templates/calendar/calendar.html', // DON'T USE ./view/bla,bla,bla...
-      link: function(scope,element,attr){
+      link: function(scope,element,attr, ctrl){
         scope.cellWidth = element[0].querySelector('#calendar').clientWidth / 8;
+
 
 
         angular.element($window).bind('resize', function(){
@@ -169,6 +179,9 @@
             element[0].style.width = cellWidth+'px';
           }
         );
+
+
+
       }
     };
   });
@@ -178,11 +191,15 @@
     return{
       restrict: 'A',
       link: function(scope,element,attr){
-        scope.$watch(
+          console.log(element);
+
+          scope.$watch(
           'cellWidth', function ( cellWidth ) {
             element[0].style.width = (30*cellWidth)+'px';
-          }
-        );
+          });
+
+
+
       }
     };
   });

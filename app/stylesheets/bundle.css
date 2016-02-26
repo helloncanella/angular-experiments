@@ -5,13 +5,14 @@ header {
 
 #calendar {
   margin-top: 85px;
+  position: relative;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
-  #calendar .right-side {
+  #calendar #scroll-x-box {
     overflow-y: hidden;
     padding-bottom: 0.58824vh; }
-    #calendar .right-side .cell {
+    #calendar #scroll-x-box .cell {
       border-left: none; }
   #calendar .cell {
     text-align: center;
@@ -26,12 +27,10 @@ header {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center; }
-  #calendar #grid-calendar {
-    position: relative; }
-    #calendar #grid-calendar > div {
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex; }
+  #calendar #grid-calendar > div {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
   #calendar #time-bar {
     display: -webkit-flex;
     display: -ms-flexbox;

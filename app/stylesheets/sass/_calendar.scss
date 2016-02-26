@@ -3,10 +3,11 @@
   $cell-height:60vh/17;
   $border-color:red;
   margin-top: 85px;
+  position:relative;
 
   display: flex;
 
-  .right-side{
+  #scroll-x-box{
     overflow-y: hidden;
     .cell{
       border-left: none;
@@ -24,7 +25,6 @@
   }
 
   #grid-calendar{
-    position:relative;
     &>div{
       display: flex;
     }
@@ -35,8 +35,6 @@
     flex-flow: column;
     position: relative;
     top: $cell-height*1;
-
-
   }
 
   #day-header{
