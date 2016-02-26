@@ -17,7 +17,7 @@ header {
   #calendar .cell {
     text-align: center;
     height: 3.52941vh;
-    border: 1px solid red;
+    border: 1px solid black;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -45,8 +45,8 @@ header {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
-    #calendar #day-header .cell:first-child {
-      border-left: 1px solid red; }
+    #calendar #day-header * {
+      border: none; }
 
 body {
   margin: 0; }

@@ -1,7 +1,7 @@
 #calendar{
 
   $cell-height:60vh/17;
-  $border-color:red;
+  $border-color:black;
   margin-top: 85px;
   position:relative;
 
@@ -40,9 +40,11 @@
   #day-header{
     position:relative;
     display:flex;
-    .cell:first-child{
-      border-left:1px solid $border-color;
+
+    *{
+      border: none;
     }
+
   }
 
 

@@ -109,11 +109,13 @@
 
   app.directive('control',['$document', '$window',function($document, $window){
 
-    function link(scope,element,attr){
+    function link(scope,element,attr, dayLimitsCtrl){
+      console.log(attr);
 
       var  width, widthStr, scrollXBox;
 
       var action = attr.action;
+
 
       //setting the icon
       if(action == 'back'){
@@ -128,7 +130,12 @@
 
         if(action=='back'){
           scrollXBox.scrollLeft -= width;
+
+          if(0<=dayLimitsCtrl.pastWeeks){
+            // dayLimitsCtrl.pastWeeks--;
+          }
         }else if(action=='forward'){
+          // dayLimitsCtrl.pastWeeks++;
           scrollXBox.scrollLeft += width;
         }
 
@@ -143,6 +150,7 @@
       });
     }
     return{
+      require: '^dayLimits',
       restrict: 'E',
       scope:{
         action:'@',
@@ -205,9 +213,9 @@
         var month = today.getMonth();
         var year = today.getFullYear();
 
-        this.pastWeek = 0;
-        this.start = new Date(year, month, monthDay + this.pastWeek*7);
-        this.end = new Date(year, month, (monthDay+6) + this.pastWeek*7);
+        this.pastWeeks = 0;
+        this.start = new Date(year, month, monthDay + this.pastWeeks*7);
+        this.end = new Date(year, month, (monthDay+6) + this.pastWeeks*7);
       },
     };
   });
