@@ -12,11 +12,12 @@
 <body>
 
   <header></header>
-  <main ng-app="app">
-
-    <div ng-controller="ControlController">
-      <control token="back" action="oneWeekBack()"></control>
-      <control token="forward" action="oneWeekForward()"></control>
+  <main ng-app="calendar" class='row'>
+    <div ng-controller="ControlController" id='controls'>
+      <div id='controls-wrapper'>
+        <control token="back" action="oneWeekBack()"></control>
+        <control token="forward" action="oneWeekForward()"></control>
+      </div>
       <day-limits></day-limits>
     </div>
 

@@ -4,7 +4,7 @@ header {
   background: #333; }
 
 #calendar {
-  margin-top: 85px;
+  margin-top: 49px;
   position: relative;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -47,6 +47,29 @@ header {
     display: flex; }
     #calendar #day-header * {
       border: none; }
+
+#controls {
+  font-size: 20px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-top: 43px; }
+  #controls #controls-wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+    #controls #controls-wrapper .control {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      margin-right: 10px; }
 
 body {
   margin: 0; }
