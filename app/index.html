@@ -13,6 +13,7 @@
 
   <header></header>
   <main ng-app="calendar" class='row'>
+
     <div ng-controller="ControlController" id='controls'>
       <div id='controls-wrapper'>
         <control token="back" action="oneWeekBack()"></control>
@@ -21,7 +22,10 @@
       <day-limits></day-limits>
     </div>
 
-    <calendar></calendar>
+
+    <div ng-controller="CalendarController">
+      <calendar></calendar>
+    </div>
 
 
   </main>

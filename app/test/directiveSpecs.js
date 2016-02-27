@@ -10,7 +10,7 @@ var
   controller;
 
   // Load the myApp module, which contains the directive
-  beforeEach(angular.mock.module('app'));
+  beforeEach(angular.mock.module('calendar'));
   beforeEach(angular.mock.module('templates'));
 
   // Store references to $rootScope and $compile
@@ -19,19 +19,24 @@ var
     // The injector unwraps the underscores (_) from around the parameter names when matching
     $compile = _$compile_;
     $rootScope = _$rootScope_;
+
+    $rootScope.time =[12,12.5];
+    $rootScope.thirtyDays = [1,3,10];
   }));
 
 
   describe('<grid-calendar>', function(){
-    it('The number of generated cells is equal to 510 (30 days * 17 thirty minutes)', function() {
+    it('The number of generated cells is equal 6', function() {
+
       // Compile a piece of HTML containing the directive
       var element = $compile("<grid-calendar></grid-calendar>")($rootScope);
+
       // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
       $rootScope.$digest();
 
       var table = element[0];
 
-      expect(table.querySelectorAll('.cell').length).toEqual(510);
+      expect(table.querySelectorAll('.cell').length).toEqual(6);
     });
   });
 
@@ -44,7 +49,7 @@ var
 
       var timeBar = element[0];
 
-      expect(timeBar.querySelectorAll('.cell').length).toEqual(17);
+      expect(timeBar.querySelectorAll('.cell').length).toEqual(2);
     });
   });
 
@@ -72,7 +77,7 @@ var
       var dayHeader = element[0];
       //console.log(new Date(dayHeader.querySelector('td').attributes['data-day'].value).getMonth()+1);
 
-      expect(dayHeader.querySelectorAll('.cell').length).toEqual(30);
+      expect(dayHeader.querySelectorAll('.cell').length).toEqual(3);
     });
   });
 

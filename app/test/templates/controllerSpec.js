@@ -3,7 +3,7 @@
 require('angular-mocks');
 
 describe('PasswordController', function() {
-  beforeEach(angular.mock.module('app'));
+  beforeEach(angular.mock.module('calendar'));
 
   var $controller;
 

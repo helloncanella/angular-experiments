@@ -7,7 +7,7 @@ describe('Unit testing great quotes', function() {
       $rootScope;
 
   // Load the myApp module, which contains the directive
-  beforeEach(angular.mock.module('app'));
+  beforeEach(angular.mock.module('calendar'));
   beforeEach(angular.mock.module('templates'));
 
   // Store references to $rootScope and $compile

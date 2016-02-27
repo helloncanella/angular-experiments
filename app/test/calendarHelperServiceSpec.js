@@ -3,7 +3,7 @@
 require('angular-mocks');
 
 describe('calendarHelper', function(){
-  beforeEach(angular.mock.module('app'));
+  beforeEach(angular.mock.module('calendar'));
 
   var calendarHelper;
 

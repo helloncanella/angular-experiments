@@ -5,7 +5,7 @@ require('angular-mocks');
 
 describe('Filters', function(){
 
-  beforeEach(angular.mock.module('app'));
+  beforeEach(angular.mock.module('calendar'));
 
 
   describe('monthDayFormat', function(){

@@ -3,7 +3,7 @@
 require('angular-mocks');
 
 describe('hourFilter', function(){
-  beforeEach(angular.mock.module('app'));
+  beforeEach(angular.mock.module('calendar'));
 
   var hourFilter;
 
