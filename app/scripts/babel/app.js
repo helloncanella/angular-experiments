@@ -82,7 +82,7 @@
           todayDate = today.getDate(),
           thirtyDays = [];
 
-        for(var i=0; 30>i; i++){
+        for(var i=0; 28>i; i++){
           day = new Date(year, month, todayDate + i);
           thirtyDays.push(day.toLocaleString());
         }
@@ -107,18 +107,38 @@
 
   }]);
 
+
+  app.controller('ControlController', ['$scope', function ControlController($scope){
+    $scope.pastWeek = 0;
+
+    $scope.oneWeekBack = function(){
+      if($scope.pastWeek>0){
+        $scope.pastWeek--;
+        $scope.$digest();
+      }
+    };
+
+    $scope.oneWeekForward = function(){
+      if(3>$scope.pastWeek){
+        $scope.pastWeek++;
+        $scope.$digest();
+      }
+    };
+
+  }]);
+
   app.directive('control',['$document', '$window',function($document, $window){
 
     function link(scope,element,attr){
 
       var  width, widthStr, scrollXBox;
 
-      var action = attr.action;
+      var token = attr.token;
 
       //setting the icon
-      if(action == 'back'){
+      if(token == 'back'){
         scope.iconClass = 'fa fa-arrow-left';
-      }else if(action == 'forward'){
+      }else if(token == 'forward'){
         scope.iconClass = 'fa fa-arrow-right';
       }
 
@@ -126,11 +146,14 @@
         var scrollXBox = geScrollXBox();
         var width = getBoxWidth();
 
-        if(action=='back'){
+        if(token=='back'){
           scrollXBox.scrollLeft -= width;
-        }else if(action=='forward'){
+        }else if(token=='forward'){
           scrollXBox.scrollLeft += width;
         }
+
+        scope.action();
+
 
         function geScrollXBox(){
           return angular.element($document[0].getElementById('scroll-x-box'))[0];
@@ -145,7 +168,8 @@
     return{
       restrict: 'E',
       scope:{
-        action:'@',
+        token:'@',
+        action:'&'
       },
       link: link,
       templateUrl:'view/templates/control/control.html'
@@ -156,9 +180,6 @@
     return{
       restrict: 'E',
       templateUrl:'view/templates/calendar/components/grid-calendar.html', // DON'T USE ./view/bla,bla,bla...
-      link: function(scope, element, attr){
-
-      }
     };
   });
 
@@ -168,10 +189,12 @@
       restrict: 'E',
       templateUrl:'view/templates/calendar/components/day-header.html' // DON'T USE ./view/bla,bla,bla...
     };
+
   });
 
   app.directive('timeBar',function(){
     return{
+
       restrict: 'E',
       templateUrl:'view/templates/calendar/components/time-bar.html' // DON'T USE ./view/bla,bla,bla...
     };
@@ -180,6 +203,7 @@
   app.directive('calendar',['$window', function($window){
     return{
       restrict: 'E',
+
       templateUrl:'view/templates/calendar/calendar.html', // DON'T USE ./view/bla,bla,bla...
       link: function(scope,element,attr, ctrl){
         scope.cellWidth = element[0].querySelector('#calendar').clientWidth / 8;
@@ -197,17 +221,22 @@
     return{
       restrict:'E',
       templateUrl: 'view/templates/day-limits/day-limits.html',
-      scope:{},
-      controllerAs:'ctrl',
-      controller: function(){
+      link: function(scope,element){
         var today = new Date();
         var monthDay = today.getDate();
         var month = today.getMonth();
         var year = today.getFullYear();
 
-        this.pastWeek = 0;
-        this.start = new Date(year, month, monthDay + this.pastWeek*7);
-        this.end = new Date(year, month, (monthDay+6) + this.pastWeek*7);
+        changeLimits();
+
+        scope.$watch('pastWeek', function(){
+          changeLimits();
+        });
+
+        function changeLimits(){
+          scope.start = new Date(year, month, monthDay + scope.pastWeek*7);
+          scope.end = new Date(year, month, (monthDay+6) + scope.pastWeek*7);
+        }
       },
     };
   });
@@ -232,7 +261,7 @@
       link: function(scope,element,attr){
         scope.$watch(
         'cellWidth', function ( cellWidth ) {
-          element[0].style.width = (30*cellWidth)+'px';
+          element[0].style.width = (28*cellWidth)+'px';
         });
       }
     };

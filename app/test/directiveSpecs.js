@@ -5,9 +5,9 @@ require('angular-mocks');
 describe('Directives', function() {
 
 var
-    $compile,
-    $rootScope,
-    controller;
+  $compile,
+  $rootScope,
+  controller;
 
   // Load the myApp module, which contains the directive
   beforeEach(angular.mock.module('app'));
@@ -44,7 +44,6 @@ var
 
       var timeBar = element[0];
 
-
       expect(timeBar.querySelectorAll('.cell').length).toEqual(17);
     });
   });
@@ -58,9 +57,6 @@ var
       $rootScope.$digest();
 
       var timeBar = element[0];
-
-
-
     });
   });
 

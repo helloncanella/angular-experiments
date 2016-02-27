@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="./bower_components/foundation/css/foundation.min.css">
   <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="./stylesheets/bundle.css">
+  <!-- <script type="text/javascript" src='./vendor/angular.min.js'></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <title>teco</title>
 </head>
@@ -13,12 +14,14 @@
   <header></header>
   <main ng-app="app">
 
-    <control action="back" ></control>
-    <control action="forward" ></control>
+    <div ng-controller="ControlController">
+      <control token="back" action="oneWeekBack()"></control>
+      <control token="forward" action="oneWeekForward()"></control>
+      <day-limits></day-limits>
+    </div>
 
     <calendar></calendar>
 
-    <day-limits></day-limits>
 
   </main>
 
