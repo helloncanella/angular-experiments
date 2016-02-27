@@ -20,66 +20,26 @@ var
     $compile = _$compile_;
     $rootScope = _$rootScope_;
 
-    $rootScope.time =[12,12.5];
-    $rootScope.thirtyDays = [1,3,10];
   }));
 
-
-  describe('<grid-calendar>', function(){
-    it('The number of generated cells is equal 6', function() {
-
-      // Compile a piece of HTML containing the directive
-      var element = $compile("<grid-calendar></grid-calendar>")($rootScope);
-
-      // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
-      $rootScope.$digest();
-
-      var table = element[0];
-
-      expect(table.querySelectorAll('.cell').length).toEqual(6);
-    });
-  });
-
-  describe('<time-bar>', function(){
-    it('', function() {
-      // Compile a piece of HTML containing the directive
-      var element = $compile("<time-bar></<time-bar>")($rootScope);
-      // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
-      $rootScope.$digest();
-
-      var timeBar = element[0];
-
-      expect(timeBar.querySelectorAll('.cell').length).toEqual(2);
-    });
-  });
-
-
-  describe('<calendar>', function(){
-    it('', function() {
-      // Compile a piece of HTML containing the directive
-      var element = $compile("<calendar></<calendar>")($rootScope);
-      // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
-      $rootScope.$digest();
-
-      var timeBar = element[0];
-    });
-  });
+  // describe('<class-note>', function(){
+  //
+  //   it('', function() {
+  //
+  //     // Compile a piece of HTML containing the directive
+  //     var element = $compile("<class-note></class-note>")($rootScope);
+  //     // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
+  //     $rootScope.$digest();
+  //
+  //     var classNote = element[0];
+  //
+  //     expect('')
+  //
+  //   });
+  // });
 
 
 
-  describe('<day-header>', function(){
-    it('', function() {
-      // Compile a piece of HTML containing the directive
-      var element = $compile("<day-header></day-header>")($rootScope);
-      // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
-      $rootScope.$digest();
-
-      var dayHeader = element[0];
-      //console.log(new Date(dayHeader.querySelector('td').attributes['data-day'].value).getMonth()+1);
-
-      expect(dayHeader.querySelectorAll('.cell').length).toEqual(3);
-    });
-  });
 
 
 

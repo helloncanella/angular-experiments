@@ -1,7 +1,12 @@
 @import './sass/header.scss';
 @import './sass/calendar.scss';
 @import './sass/control.scss';
+@import './sass/class-note.scss';
 
 body{
   margin:0;
 }
+
+// #calendar, #controls{
+//   display: none !important;
+// }

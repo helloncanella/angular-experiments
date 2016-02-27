@@ -260,6 +260,56 @@
           });
         }
       };
-    });
+    })
+
+    .directive('classNote', function(){
+      return{
+        restrict:'E',
+        link: function(scope, element){
+
+          scope.$watch('display', function(){
+            setVisibility();
+          });
+
+          function setVisibility(){
+            angular.element(element[0]).css('display', scope.display);
+          }
+
+        },
+        templateUrl:'view/templates/class-note/class-note.html',
+      };
+    })
+
+    .directive('cell', ['$document',function($document) {
+
+      var link = function(scope, element, attrs) {
+        angular.element(element[0]).bind('click', function(){
+          console.log($document[0].querySelectorAll('[data-day]'));
+        });
+      };
+
+      return {
+        restrict:'C',
+        link: link
+      };
+    }])
+
+
+    .controller('ClassNoteController', ["$scope",function($scope){
+      $scope.display = 'none';
+      $scope.offsetLeft = 0;
+      $scope.classDay = 'Qui, 16/03';
+      $scope.classHour = '19h30 - 20h00';
+
+      $scope.close = function(){
+        $scope.display = 'none';
+      };
+
+      $scope.showClassNote = function(){
+        $scope.display = 'block';
+      };
+    }])
+
+    ;
 
 })(window.angular|| require('angular'));

@@ -1,0 +1,59 @@
+#class-note{
+
+  border: 1px solid black;
+
+  .container{
+    margin: 30px 0;
+    position: relative;
+
+    header{
+      background: none ;
+      width: auto ;
+      height: auto ;
+      display: flex;
+
+      justify-content: center;
+
+      .close{
+        position: absolute;
+        color:#CCC;
+        right:0;
+        font-size:30px;
+        cursor: pointer;
+      }
+
+      .title{
+        text-align: center;
+
+        h2{
+          margin-top:0;
+        }
+
+      }
+    }
+
+    textarea{
+      border: 2px solid black;
+      resize: none
+    }
+
+    footer{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+
+      a{
+        text-transform: uppercase;
+        color:black;
+      }
+
+      button{
+        margin:0;
+        background: #000000;
+        border-radius:8px;
+      }
+    }
+  }
+
+
+}
