@@ -22,21 +22,41 @@ var
 
   }));
 
-  // describe('<class-note>', function(){
-  //
-  //   it('', function() {
-  //
-  //     // Compile a piece of HTML containing the directive
-  //     var element = $compile("<class-note></class-note>")($rootScope);
-  //     // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
-  //     $rootScope.$digest();
-  //
-  //     var classNote = element[0];
-  //
-  //     expect('')
-  //
-  //   });
-  // });
+  describe('day', function(){
+
+    var scope, element;
+
+    beforeEach(function(){
+      scope = {};
+      element = $compile("<div day></div>")(scope);
+    });
+
+
+    it('select one and the three next', function() {
+
+      scope.select('15');
+
+      expect(scope.active['15']).toBeTruthy();
+      expect(scope.active['16']).toBeTruthy();
+      expect(scope.active['17']).toBeTruthy();
+
+    });
+
+    it('deselect all when new is selected', function(){
+      scope.select('15');
+      scope.select('20');
+
+      scope.select('1000');
+
+      expect(scope.active['15']).not.toBeTruthy();
+      expect(scope.active['20']).not.toBeTruthy();
+      expect(scope.active['1000']).toBeTruthy();
+      expect(scope.active['1001']).toBeTruthy();
+      expect(scope.active['1002']).toBeTruthy();
+
+
+    });
+  });
 
 
 

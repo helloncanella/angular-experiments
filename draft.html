@@ -1,0 +1,6 @@
+<div id="grid-calendar" resizecontent>
+  <div ng-repeat='hour in time'>
+    <div class='cell day{{$index+1}} hour{{$parent.$index+1}}' resizecell ng-repeat='day in thirtyDays' data-day='{{day | dayFormat}}' data-hour='{{hour | hourFormat}}'>
+    </div>
+  </div>
+</div>

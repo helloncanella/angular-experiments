@@ -9,6 +9,8 @@ header {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
+  #calendar .active {
+    background: red; }
   #calendar #scroll-x-box {
     overflow-y: hidden;
     padding-bottom: 0.58824vh; }
@@ -27,10 +29,17 @@ header {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center; }
-  #calendar #grid-calendar > div {
+  #calendar #grid-calendar {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
+    #calendar #grid-calendar .day {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column; }
   #calendar #time-bar {
     display: -webkit-flex;
     display: -ms-flexbox;

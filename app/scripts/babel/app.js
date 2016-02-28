@@ -1,5 +1,9 @@
 'use strict';
-(function(angular){
+
+var angular = window.angular|| require('angular');
+var lodash = window._ || require('lodash');
+
+(function(angular, _){
 
   var calendar = angular.module('calendar', []);
 
@@ -170,29 +174,6 @@
       };
     }])
 
-    .directive('gridCalendar',function(){
-      return{
-        restrict: 'E',
-        templateUrl:'view/templates/calendar/components/grid-calendar.html', // DON'T USE ./view/bla,bla,bla...
-      };
-    })
-
-    .directive('dayHeader',function(){
-      return{
-        restrict: 'E',
-        templateUrl:'view/templates/calendar/components/day-header.html' // DON'T USE ./view/bla,bla,bla...
-      };
-
-    })
-
-    .directive('timeBar',function(){
-      return{
-
-        restrict: 'E',
-        templateUrl:'view/templates/calendar/components/time-bar.html' // DON'T USE ./view/bla,bla,bla...
-      };
-    })
-
     .directive('calendar',['$window', function($window){
       return{
         restrict: 'E',
@@ -280,17 +261,21 @@
       };
     })
 
-    .directive('cell', ['$document',function($document) {
+    .directive('day', ['$document',function($document) {
+      return function(scope){
 
-      var link = function(scope, element, attrs) {
-        angular.element(element[0]).bind('click', function(){
-          console.log($document[0].querySelectorAll('[data-day]'));
-        });
-      };
+        scope.active = {};
+        scope.select = function(cell){
+          _.each(scope.active, setFalse);
+          scope.active[cell] = true;
+          scope.active[Number(cell)+1] = true;
+          scope.active[Number(cell)+2] = true;
+        };
 
-      return {
-        restrict:'C',
-        link: link
+        function setFalse (value, cell, active) {
+          active[cell] = false;
+        }
+
       };
     }])
 
@@ -312,4 +297,4 @@
 
     ;
 
-})(window.angular|| require('angular'));
+})(angular, lodash);

@@ -7,7 +7,6 @@ describe('Filters', function(){
 
   beforeEach(angular.mock.module('calendar'));
 
-
   describe('monthDayFormat', function(){
     var monthDayFormatFilter, day;
 

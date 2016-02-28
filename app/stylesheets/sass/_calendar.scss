@@ -6,7 +6,11 @@
   position:relative;
 
   display: flex;
-  
+
+
+  .active{
+    background: red;
+  }
 
   #scroll-x-box{
     overflow-y: hidden;
@@ -26,8 +30,10 @@
   }
 
   #grid-calendar{
-    &>div{
+    display: flex;
+    .day{
       display: flex;
+      flex-direction: column;
     }
   }
 

@@ -59,7 +59,7 @@ gulp.task('browserify', function() {
   rebundle();
 });
 
-gulp.task('watch', [/*'browserify',*/ 'sass'], () => {
+gulp.task('default', [/*'browserify',*/ 'sass'], () => {
 
   browserSync.init({
     server: "./app",
