@@ -95,7 +95,7 @@
 
 
 
-  app.controller('MyAvailabilityController', ['$scope','calendarHelper', function MyAvailabilityController($scope, calendarHelper) {
+  app.controller('CalendarController', ['$scope','calendarHelper', function CalendarController($scope, calendarHelper) {
 
     $scope.availability = {
       start:12,

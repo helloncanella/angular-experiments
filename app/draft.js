@@ -3,7 +3,7 @@
 
   var app = angular.module('app', []);
 
-  app.controller('MyAvailabilityController', function MyAvailabilityController($scope) {
+  app.controller('CalendarController', function CalendarController($scope) {
 
     $scope.time = function(availability){
       var timeArray = [],

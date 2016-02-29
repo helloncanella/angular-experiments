@@ -2,7 +2,7 @@
 
 require('angular-mocks');
 
-describe('MyAvailabilityController', function() {
+describe('CalendarController', function() {
   beforeEach(angular.mock.module('calendar'));
 
   var $controller, $scope, controller, $rootScope;
@@ -12,7 +12,7 @@ describe('MyAvailabilityController', function() {
     $controller = _$controller_;
     $rootScope = _$rootScope_;
     $scope = {};
-    controller  = $controller('MyAvailabilityController', { $scope: $scope });
+    controller  = $controller('CalendarController', { $scope: $scope });
 
     $scope.time = [12,12.5];
 

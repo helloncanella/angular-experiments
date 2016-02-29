@@ -1,7 +1,7 @@
 <div id="calendar">
 
   <div id="time-bar">
-    <div resizecell class='cell' ng-repeat='hour in time' data-hour='{{hour | hourFormat}}'>
+    <div resizecell class='cell' ng-repeat='hour in time'>
       <span>{{hour | hourFormat}}</span>
     </div>
   </div>
@@ -9,12 +9,22 @@
   <div id='scroll-x-box'>
 
     <div id="day-header" resizecontent>
-      <div class='cell' resizecell ng-repeat='day in thirtyDays' data-day='{{day}}'><span>{{day | dayFormat}}</span></div>
+      <div
+        class='cell'
+        resizecell
+        ng-repeat='day in thirtyDays'>
+          <span>{{day | dayFormat}}</span>
+      </div>
     </div>
 
     <div grid id="grid-calendar" resizecontent>
       <div ng-repeat='day in thirtyDays'>
-        <div class='cell hour' ng-repeat='hour in time' resizecell ng-class="{active: active[$parent.$index][$index]}" ng-click="select($parent.$index, $index); setClassTime(day,hour)"   data-date='{{day}}' data-time='{{hour}}'>
+        <div
+          cell resizecell
+          class='cell hour'
+          ng-repeat='hour in time'
+          ng-class="{active: active[$parent.$index][$index]}" ng-click="select($parent.$index, $index); setClassTime(day,hour)"
+        > <span>{{cellMeasures}}</span>
         </div>
       </div>
     </div>

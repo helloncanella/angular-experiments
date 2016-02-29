@@ -96,7 +96,7 @@ var lodash = window._ || require('lodash');
       };
     })
 
-    .controller('MyAvailabilityController', ['$scope','calendarHelper', function MyAvailabilityController($scope, calendarHelper) {
+    .controller('CalendarController', ['$scope','calendarHelper', function ($scope, calendarHelper) {
 
       var blockDuration = 0.5; // 0.5h = 30 minutes
 
@@ -110,12 +110,19 @@ var lodash = window._ || require('lodash');
       $scope.numberOfTimeBlocks = $scope.classDuration / blockDuration + 1;
 
       $scope.time = calendarHelper.time($scope.availability);
+
       $scope.thirtyDays = calendarHelper.thirtyDays();
+
+      $scope.cellMeasures = {};
 
     }])
 
+
+
     .controller('ClassNoteController', ["$scope","dayFormatFilter", "hourFormatFilter", function($scope, dayFormatFilter, hourFormatFilter){
-      $scope.closed = false;
+      $scope.closed = true;
+
+      $scope.cellMeasures = {};
 
       $scope.close = function(){
         $scope.closed = true;
@@ -142,17 +149,25 @@ var lodash = window._ || require('lodash');
       $scope.pastWeek = 0;
 
       $scope.oneWeekBack = function(){
-        if($scope.pastWeek>0){
+        if(0<$scope.pastWeek){
           $scope.pastWeek--;
         }
       };
 
       $scope.oneWeekForward = function(){
-        if(3>$scope.pastWeek){
+        if($scope.pastWeek<3){
           $scope.pastWeek++;
         }
       };
 
+    }])
+
+    .directive('cell',['$window',function($window){
+      return function(scope, element){
+        element.bind('click', function(){
+          scope.cellMeasures = element[0].getBoundingClientRect();
+        });
+      };
     }])
 
     .directive('control',['$rootScope','$document', '$window',function($rootScope, $document, $window){
@@ -276,17 +291,6 @@ var lodash = window._ || require('lodash');
     .directive('classNote', function(){
       return{
         restrict:'E',
-        link: function(scope, element){
-
-          scope.$watch('display', function(){
-            setVisibility();
-          });
-
-          function setVisibility(){
-            angular.element(element[0]).css('display', scope.display);
-          }
-
-        },
         templateUrl:'view/templates/class-note/class-note.html',
       };
     })
