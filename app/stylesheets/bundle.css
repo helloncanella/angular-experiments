@@ -10,7 +10,7 @@ header {
   display: -ms-flexbox;
   display: flex; }
   #calendar .active {
-    background: red; }
+    background: aqua; }
   #calendar #scroll-x-box {
     overflow-y: hidden;
     padding-bottom: 0.58824vh; }
@@ -82,6 +82,8 @@ header {
 
 #class-note {
   border: 1px solid black; }
+  #class-note.closed {
+    display: none; }
   #class-note .container {
     margin: 30px 0;
     position: relative; }

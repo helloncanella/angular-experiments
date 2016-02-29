@@ -96,16 +96,46 @@ var lodash = window._ || require('lodash');
       };
     })
 
-    .controller('CalendarController', ['$scope','calendarHelper', function CalendarController($scope, calendarHelper) {
+    .controller('MyAvailabilityController', ['$scope','calendarHelper', function MyAvailabilityController($scope, calendarHelper) {
+
+      var blockDuration = 0.5; // 0.5h = 30 minutes
 
       $scope.availability = {
-        start:12,
-        end:20
+        start:12, //12h
+        end:20 //20h
       };
+
+      $scope.classDuration = 1.5; //1h30 min
+
+      $scope.numberOfTimeBlocks = $scope.classDuration / blockDuration + 1;
 
       $scope.time = calendarHelper.time($scope.availability);
       $scope.thirtyDays = calendarHelper.thirtyDays();
 
+    }])
+
+    .controller('ClassNoteController', ["$scope","dayFormatFilter", "hourFormatFilter", function($scope, dayFormatFilter, hourFormatFilter){
+      $scope.closed = false;
+
+      $scope.close = function(){
+        $scope.closed = true;
+      };
+
+      $scope.setClassTime = function(day, hour){
+        $scope.open();
+
+        $scope.selectedDay =  dayFormatFilter(day);
+
+        var
+          start = hourFormatFilter(hour),
+          end = hourFormatFilter(hour + $scope.classDuration);
+
+        $scope.selectedHour = start + ' - ' + end;
+      };
+
+      $scope.open = function(){
+        $scope.closed = false;
+      };
     }])
 
     .controller('ControlController', ['$scope', function ControlController($scope){
@@ -261,39 +291,41 @@ var lodash = window._ || require('lodash');
       };
     })
 
-    .directive('day', ['$document',function($document) {
-      return function(scope){
+    .directive('grid', ['$document',function($document) {
+      var link = function(scope){
 
         scope.active = {};
-        scope.select = function(cell){
+        scope.select = function(dayIndex, hourIndex){
+
           _.each(scope.active, setFalse);
-          scope.active[cell] = true;
-          scope.active[Number(cell)+1] = true;
-          scope.active[Number(cell)+2] = true;
+          scope.active[dayIndex] = {};
+
+          var nBlocks = scope.numberOfTimeBlocks;
+
+          for(var i = 0; nBlocks>i; i++){
+            scope.active[dayIndex][Number(hourIndex) + i] = true;
+          }
+
         };
 
-        function setFalse (value, cell, active) {
-          active[cell] = false;
+        function setFalse (day) {
+
+          _.each(day, function(hour, index, day){
+            day[index] = false; // day[index] == hour;
+          });
+
         }
 
       };
+
+      return{
+        link:link
+      };
+
     }])
 
 
-    .controller('ClassNoteController', ["$scope",function($scope){
-      $scope.display = 'none';
-      $scope.offsetLeft = 0;
-      $scope.classDay = 'Qui, 16/03';
-      $scope.classHour = '19h30 - 20h00';
 
-      $scope.close = function(){
-        $scope.display = 'none';
-      };
-
-      $scope.showClassNote = function(){
-        $scope.display = 'block';
-      };
-    }])
 
     ;
 

@@ -1,10 +1,10 @@
-<div id='class-note' class='medium-6 large-5'>
+<div id='class-note' ng-class='{closed: closed}' class='medium-6 large-5'>
 
   <div class="container medium-10 medium-offset-1" >
     <header>
       <div class="title">
-        <h2>{{classDay}}</h2>
-        <p>{{classHour}}</p>
+        <h2>{{selectedDay}}</h2>
+        <p>{{selectedHour}}</p>
       </div>
       <div class="close" ng-click='close()'>
         <span>X</span>

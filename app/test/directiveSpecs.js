@@ -22,38 +22,47 @@ var
 
   }));
 
-  describe('day', function(){
+  describe('grid', function(){
 
-    var scope, element;
+    var $scope, element;
 
     beforeEach(function(){
-      scope = {};
-      element = $compile("<div day></div>")(scope);
+      $scope = {};
+
+      element = $compile("<div grid></div>")($scope);
+       // each block = 30 minutes - 1,5h of class = 4 timeBlocks;
     });
 
 
-    it('select one and the three next', function() {
+    it('select one day and hour in the grid conform the numberOfTimeBlocks', function() {
 
-      scope.select('15');
+      var startHour = '15';
 
-      expect(scope.active['15']).toBeTruthy();
-      expect(scope.active['16']).toBeTruthy();
-      expect(scope.active['17']).toBeTruthy();
+      $scope.numberOfTimeBlocks = 5;
+
+      $scope.select('20', startHour);
+
+      expect($scope.active['20']['15']).toBeTruthy();
+      expect($scope.active['20']['16']).toBeTruthy();
+      expect($scope.active['20']['17']).toBeTruthy();
+      expect($scope.active['20']['18']).toBeTruthy();
+      expect($scope.active['20']['19']).toBeTruthy();
 
     });
 
     it('deselect all when new is selected', function(){
-      scope.select('15');
-      scope.select('20');
 
-      scope.select('1000');
+      $scope.numberOfTimeBlocks = 2;
 
-      expect(scope.active['15']).not.toBeTruthy();
-      expect(scope.active['20']).not.toBeTruthy();
-      expect(scope.active['1000']).toBeTruthy();
-      expect(scope.active['1001']).toBeTruthy();
-      expect(scope.active['1002']).toBeTruthy();
+      $scope.select('1','15');
+      $scope.select('3','20');
 
+      $scope.select('9','1000');
+
+      expect($scope.active['1']['15']).not.toBeTruthy();
+      expect($scope.active['3']['20']).not.toBeTruthy();
+      expect($scope.active['9']['1000']).toBeTruthy();
+      expect($scope.active['9']['1001']).toBeTruthy();
 
     });
   });

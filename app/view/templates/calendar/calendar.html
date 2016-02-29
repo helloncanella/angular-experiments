@@ -13,11 +13,15 @@
     </div>
 
     <div grid id="grid-calendar" resizecontent>
-      <div class='day' ng-repeat='day in thirtyDays'>
-        <div class='cell hour' ng-repeat='hour in time' resizecell ng-class="{active: active[$index]}" ng-click="select($index)"    data-date='{{day}}' data-time='{{hour}}'>
+      <div ng-repeat='day in thirtyDays'>
+        <div class='cell hour' ng-repeat='hour in time' resizecell ng-class="{active: active[$parent.$index][$index]}" ng-click="select($parent.$index, $index); setClassTime(day,hour)"   data-date='{{day}}' data-time='{{hour}}'>
         </div>
       </div>
     </div>
+
+
+
+
   </div>
 
 
