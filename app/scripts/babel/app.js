@@ -302,18 +302,35 @@ var lodash = window._ || require('lodash');
     .directive('classScheduling', ['$window', function($window){
 
       var link = function (scope, element){
-        var
-          cellMeasures = scope.measures(),
-          windowWidth = $window.innerHeight,
-          padding = 5; //5px
-          element.css('position', 'absolute');
 
-        if(cellMeasures.left < windowWidth/2){
-          element.css("left",(cellMeasures.right + padding)+'px');
-        }else{
-          element.css("right",(cellMeasures.left - padding)+'px');
-        }
+        scope.$watch('measures', function(){
 
+          var
+            cellMeasures = scope.measures,
+            windowWidth = $window.innerWidth,
+            windowHeight = $window.innerHeight,
+            padding = 5; //5px
+            element.css('position', 'absolute');
+
+
+          //Horizontal Positioning
+          if(cellMeasures.left < windowWidth/2){
+            element.css("left",(cellMeasures.right + padding)+'px');
+              console.log('oi');
+          }else{
+            console.log('lee');
+            element.css("right",(cellMeasures.left - padding)+'px');
+          }
+
+          //Vertical Positioning
+          if(cellMeasures.bottom < windowHeight/2){
+            console.log('beco');
+            element.css("top",cellMeasures.top+'px');
+          }else{
+            console.log('aqgua');
+            element.css("bottom",cellMeasures.bottom+'px');
+          }
+        },true);
       };
 
       return{
@@ -321,7 +338,7 @@ var lodash = window._ || require('lodash');
         templateUrl:'view/templates/class-scheduling/class-scheduling.html',
         link: link,
         scope: {
-          measures:"&"
+          measures:"="
         }
       };
 
