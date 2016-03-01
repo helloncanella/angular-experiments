@@ -299,10 +299,21 @@ var lodash = window._ || require('lodash');
       };
     })
 
-    .directive('classScheduling', function(){
+    .directive('classScheduling', ['$window', function($window){
 
       var link = function (scope, element){
-        var cellMeasures = scope.cellMeasures();
+        var
+          cellMeasures = scope.measures(),
+          windowWidth = $window.innerHeight,
+          padding = 5; //5px
+          element.css('position', 'absolute');
+
+        if(cellMeasures.left < windowWidth/2){
+          element.css("left",(cellMeasures.right + padding)+'px');
+        }else{
+          element.css("right",(cellMeasures.left - padding)+'px');
+        }
+
       };
 
       return{
@@ -310,11 +321,11 @@ var lodash = window._ || require('lodash');
         templateUrl:'view/templates/class-scheduling/class-scheduling.html',
         link: link,
         scope: {
-          cellMeasures:"&"
+          measures:"&"
         }
       };
 
-    })
+    }])
 
     .directive('grid', ['$document',function($document) {
       var link = function(scope){

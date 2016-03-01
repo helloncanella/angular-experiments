@@ -64,16 +64,7 @@ var
   });
 
   describe('classScheduling',function(){
-    var element, cell;
-
-    var $window = {
-      innerHeight: 768,
-      innerWidth: 1024,
-    };
-
-    var
-      windowWidth = $window.innerWidth,
-      windowHeight = $window.innerHeight;
+    var element, cell, windowWidth, windowHeight ,$window = {};
 
     var cellFactory = function(newObject){
 
@@ -99,21 +90,52 @@ var
     };
 
 
-    beforeEach(function(){});
+    beforeEach(function(){
+      inject(['$window', function(_$window_){
+        $window = _$window_;
+        windowWidth = $window.innerWidth = 1024;
+        windowHeight = $window.innerHeight = 768;
+      }]);
+    });
 
-    it('if cellMeasure left < windowWidth/2 => cellMeasure is at its right ', function(){
+    it('if cellMeasure left < windowWidth/2 => pane is at its right ', function(){
 
-      var cell = cellFactory({
+      $rootScope.cell = cellFactory({
         left:350,
+        right:450
       });
 
-      var panel = $compile("<classScheduling cellMeasures=\'cell\'></classScheduling>")($scope);
+      var panel = $compile("<class-scheduling measures='cell'></class-scheduling>")($rootScope)[0];
+
+      $rootScope.$digest();
 
       var
-        panelLeft = element[0].offsetLeft,
-        cellRight = cell.right;
+        panelLeft = Number(panel.style.left.replace(/px/,'')),
+        cellRight = $rootScope.cell.right;
 
-      expect(panelLeft>cellRight).toBeTruthy();
+
+
+      expect(cellRight<panelLeft).toBeTruthy();
+    });
+
+
+    it('if cellMeasure left => windowWidth/2 => panel is at its left ', function(){
+
+      $rootScope.cell = cellFactory({
+        left:500,
+        right:600
+      });
+
+      var panel = $compile("<class-scheduling measures='cell'></class-scheduling>")($rootScope)[0];
+
+      $rootScope.$digest();
+
+      var
+        panelRight = Number(panel.style.right.replace(/px/,'')),
+        cellLeft = $rootScope.cell.left;
+
+
+      expect(panelRight >0 && panelRight<cellLeft).toBeTruthy();
     });
 
   });
