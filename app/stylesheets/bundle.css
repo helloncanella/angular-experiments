@@ -10,7 +10,7 @@ header {
   display: -ms-flexbox;
   display: flex; }
   #calendar .active {
-    background: aqua; }
+    background: #00CCCC; }
   #calendar #scroll-x-box {
     overflow-y: hidden;
     padding-bottom: 0.58824vh; }
@@ -80,16 +80,14 @@ header {
       user-select: none;
       margin-right: 10px; }
 
-#class-note {
+#class-scheduling {
   border: 1px solid black;
-  background: white;
-  width: 15vw;
-  height: 20vh; }
-  #class-note.closed {
+  background: white; }
+  #class-scheduling.closed {
     display: none; }
-  #class-note .container {
+  #class-scheduling .container {
     margin: 30px 0; }
-    #class-note .container header {
+    #class-scheduling .container header {
       background: none;
       width: auto;
       height: auto;
@@ -99,20 +97,20 @@ header {
       -webkit-justify-content: center;
       -ms-flex-pack: center;
       justify-content: center; }
-      #class-note .container header .close {
+      #class-scheduling .container header .close {
         position: absolute;
         color: #CCC;
         right: 0;
         font-size: 30px;
         cursor: pointer; }
-      #class-note .container header .title {
+      #class-scheduling .container header .title {
         text-align: center; }
-        #class-note .container header .title h2 {
+        #class-scheduling .container header .title h2 {
           margin-top: 0; }
-    #class-note .container textarea {
+    #class-scheduling .container textarea {
       border: 2px solid black;
       resize: none; }
-    #class-note .container footer {
+    #class-scheduling .container footer {
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
@@ -122,10 +120,10 @@ header {
       -webkit-align-items: center;
       -ms-flex-align: center;
       align-items: center; }
-      #class-note .container footer a {
+      #class-scheduling .container footer a {
         text-transform: uppercase;
         color: black; }
-      #class-note .container footer button {
+      #class-scheduling .container footer button {
         margin: 0;
         background: #000000;
         border-radius: 8px; }

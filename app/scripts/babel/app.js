@@ -107,7 +107,7 @@ var lodash = window._ || require('lodash');
 
       $scope.classDuration = 1.5; //1h30 min
 
-      $scope.numberOfTimeBlocks = $scope.classDuration / blockDuration + 1;
+      $scope.numberOfTimeBlocks = Math.floor($scope.classDuration / blockDuration) + 1;
 
       $scope.time = calendarHelper.time($scope.availability);
 
@@ -312,23 +312,21 @@ var lodash = window._ || require('lodash');
             padding = 5; //5px
             element.css('position', 'absolute');
 
+          var width = Number(scope.width.replace(/px/,''));
+          var height = Number(scope.height.replace(/px/,''));
 
           //Horizontal Positioning
           if(cellMeasures.left < windowWidth/2){
             element.css("left",(cellMeasures.right + padding)+'px');
-              console.log('oi');
           }else{
-            console.log('lee');
-            element.css("right",(cellMeasures.left - padding)+'px');
+            element.css("left",(cellMeasures.right - padding - cellMeasures.width - width)+'px');
           }
 
           //Vertical Positioning
           if(cellMeasures.bottom < windowHeight/2){
-            console.log('beco');
             element.css("top",cellMeasures.top+'px');
           }else{
-            console.log('aqgua');
-            element.css("bottom",cellMeasures.bottom+'px');
+            element.css("top",(cellMeasures.bottom-height)+'px');
           }
         },true);
       };
@@ -338,7 +336,9 @@ var lodash = window._ || require('lodash');
         templateUrl:'view/templates/class-scheduling/class-scheduling.html',
         link: link,
         scope: {
-          measures:"="
+          measures:"=",
+          width:"@",
+          height:"@"
         }
       };
 
@@ -372,7 +372,7 @@ var lodash = window._ || require('lodash');
       };
 
       return{
-        link:link
+        link:link,
       };
 
     }])
