@@ -112,14 +112,11 @@ var lodash = window._ || require('lodash');
       $scope.time = calendarHelper.time($scope.availability);
 
       $scope.thirtyDays = calendarHelper.thirtyDays();
-
-      $scope.cellMeasures = {};
-
     }])
 
 
 
-    .controller('ClassNoteController', ["$scope","dayFormatFilter", "hourFormatFilter", function($scope, dayFormatFilter, hourFormatFilter){
+    .controller('ClassSchedulingController', ["$scope","dayFormatFilter", "hourFormatFilter", function($scope, dayFormatFilter, hourFormatFilter){
       $scope.closed = true;
 
       $scope.cellMeasures = {};
@@ -162,11 +159,25 @@ var lodash = window._ || require('lodash');
 
     }])
 
-    .directive('cell',['$window',function($window){
-      return function(scope, element){
+    .directive('cell',['$window', '$rootScope' ,function($window, $rootScope){
+      var link =  function(scope, element){
         element.bind('click', function(){
-          scope.cellMeasures = element[0].getBoundingClientRect();
+
+          var cellMeasures = element[0].getBoundingClientRect();
+
+          for(var key in cellMeasures){
+            scope.measures[key] = cellMeasures[key];
+          }
+
+          $rootScope.$digest();
         });
+      };
+
+      return{
+        link:link,
+        scope:{
+          measures:"="
+        }
       };
     }])
 
@@ -288,11 +299,21 @@ var lodash = window._ || require('lodash');
       };
     })
 
-    .directive('classNote', function(){
+    .directive('classScheduling', function(){
+
+      var link = function (scope, element){
+        var cellMeasures = scope.cellMeasures();
+      };
+
       return{
         restrict:'E',
-        templateUrl:'view/templates/class-note/class-note.html',
+        templateUrl:'view/templates/class-scheduling/class-scheduling.html',
+        link: link,
+        scope: {
+          cellMeasures:"&"
+        }
       };
+
     })
 
     .directive('grid', ['$document',function($document) {
@@ -306,7 +327,7 @@ var lodash = window._ || require('lodash');
 
           var nBlocks = scope.numberOfTimeBlocks;
 
-          for(var i = 0; nBlocks>i; i++){
+          for(var i = 0; i<nBlocks; i++){
             scope.active[dayIndex][Number(hourIndex) + i] = true;
           }
 

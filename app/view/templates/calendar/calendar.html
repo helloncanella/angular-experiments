@@ -21,10 +21,11 @@
       <div ng-repeat='day in thirtyDays'>
         <div
           cell resizecell
+          measures="cellMeasures"
           class='cell hour'
           ng-repeat='hour in time'
           ng-class="{active: active[$parent.$index][$index]}" ng-click="select($parent.$index, $index); setClassTime(day,hour)"
-        > <span>{{cellMeasures}}</span>
+        >{{cellMeasures.left}}
         </div>
       </div>
     </div>

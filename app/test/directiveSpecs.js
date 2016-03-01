@@ -5,9 +5,7 @@ require('angular-mocks');
 describe('Directives', function() {
 
 var
-  $compile,
-  $rootScope,
-  controller;
+  $compile, $rootScope, $scope;
 
   // Load the myApp module, which contains the directive
   beforeEach(angular.mock.module('calendar'));
@@ -15,20 +13,18 @@ var
 
   // Store references to $rootScope and $compile
   // so they are available to all tests in this describe block
-  beforeEach(inject(function(_$compile_, _$rootScope_,_$controller_){
+  beforeEach(inject(function(_$compile_, _$rootScope_){
     // The injector unwraps the underscores (_) from around the parameter names when matching
     $compile = _$compile_;
     $rootScope = _$rootScope_;
+    $scope = {};
 
   }));
 
   describe('grid', function(){
-
-    var $scope, element;
+    var element;
 
     beforeEach(function(){
-      $scope = {};
-
       element = $compile("<div grid></div>")($scope);
        // each block = 30 minutes - 1,5h of class = 4 timeBlocks;
     });
@@ -65,6 +61,61 @@ var
       expect($scope.active['9']['1001']).toBeTruthy();
 
     });
+  });
+
+  describe('classScheduling',function(){
+    var element, cell;
+
+    var $window = {
+      innerHeight: 768,
+      innerWidth: 1024,
+    };
+
+    var
+      windowWidth = $window.innerWidth,
+      windowHeight = $window.innerHeight;
+
+    var cellFactory = function(newObject){
+
+      var cell = {
+        top:0,
+        right:0,
+        bottom:0,
+        left:0,
+        height:0,
+        width: 0
+      };
+
+      for(var key in newObject){
+        if(cell.hasOwnProperty(key)){
+          cell[key] = newObject[key];
+        }else{
+          throw "key '"+key+"' isn't contained by cell model";
+        }
+      }
+
+      return cell;
+
+    };
+
+
+    beforeEach(function(){});
+
+    it('if cellMeasure left < windowWidth/2 => cellMeasure is at its right ', function(){
+
+      var cell = cellFactory({
+        left:350,
+      });
+
+      var panel = $compile("<classScheduling cellMeasures=\'cell\'></classScheduling>")($scope);
+
+      var
+        panelLeft = element[0].offsetLeft,
+        cellRight = cell.right;
+
+      expect(panelLeft>cellRight).toBeTruthy();
+    });
+
   });
 
 
