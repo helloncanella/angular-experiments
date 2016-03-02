@@ -266,13 +266,13 @@ var lodash = window._ || require('lodash');
           function changeLimits(){
 
             var deltaTime = scope.pastWeek*7;
-
             scope.start = new Date(year, month, monthDay + deltaTime);
             scope.end = new Date(year, month, (monthDay+6) + deltaTime);
           }
         },
       };
     })
+
 
     .directive('resizecell', function(){
       return{
@@ -348,6 +348,7 @@ var lodash = window._ || require('lodash');
       var link = function(scope){
 
         scope.active = {};
+        scope.activeDisplayName = 'oi';
         scope.select = function(dayIndex, hourIndex){
 
           _.each(scope.active, setFalse);
@@ -373,6 +374,9 @@ var lodash = window._ || require('lodash');
 
       return{
         link:link,
+        scope:{
+          numberOfTimeBlocks:"@"
+        }
       };
 
     }])

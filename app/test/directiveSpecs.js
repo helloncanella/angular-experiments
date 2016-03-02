@@ -27,6 +27,7 @@ describe('Directives', function() {
     var element;
 
     beforeEach(function() {
+      $scope.numberOfTimeBlocks = 5;
       element = $compile("<div grid numberOfTimeBlocks='5'></div>")($scope);
       $scope.$digest();
     });
@@ -34,22 +35,19 @@ describe('Directives', function() {
 
     it('select one day and hour in the grid conform the numberOfTimeBlocks', function() {
 
-      console.log(element.scope().active);
+      console.log(element.isolateScope().activeDisplayName);
 
-      // var startHour = '15';
-      //
-      //
-      //
-      // console.log(element.scope());
-      //
-      //
-      // $scope.select('20', startHour);
-      //
-      // expect($scope.active['20']['15']).toBeTruthy();
-      // expect($scope.active['20']['16']).toBeTruthy();
-      // expect($scope.active['20']['17']).toBeTruthy();
-      // expect($scope.active['20']['18']).toBeTruthy();
-      // expect($scope.active['20']['19']).toBeTruthy();
+      var startHour = '15';
+
+      element.isolateScope().select('20', startHour);
+
+
+      console.log(element.isolateScope().active['20']['15']);
+      expect(element.isolateScope().active['20']['15']).toBeTruthy();
+      expect(element.isolateScope().active['20']['16']).toBeTruthy();
+      expect(element.isolateScope().active['20']['17']).toBeTruthy();
+      expect(element.isolateScope().active['20']['18']).toBeTruthy();
+      expect(element.isolateScope().active['20']['19']).toBeTruthy();
 
     });
 
